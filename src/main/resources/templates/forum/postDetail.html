@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Blog post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .post-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .like-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .like-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+</head>
+<body th:object="${post}">
+	<h1>Post by <span th:text="*{author.name}">John Doe</span></h1>
+	<p th:text="*{content}">This is a post.</p>
+	<p>Likes: <span th:text="${likeCount}">0</span></p>
+	<form method="post" action="#" th:action="@{/forum/post/{id}/like(id = ${post.id})}">
+		<!--<label for="userdropdown">Select your username</label>
+		<select id="userdropdown" th:name="likerId">
+			<option th:each="userOption : ${userList}" th:value="${userOption.id}" th:text="${userOption.name}"></option>
+		</select>-->
+		<input type="submit" value="Like!">
+	</form>
+		<form method="post" action="#" th:action="@{/forum/post/{id}/comment(id = ${post.id})}">
+         <!--<label for="userdropdown">Select your username</label>
+		<select id="userdropdown" th:name="commenterId">
+		<option th:each="userOption : ${userList}" th:value="${userOption.id}" th:text="${userOption.name}"></option>
+	</select>-->
+		<textarea id="comment" th:name="commenterId" th:value:"${userOption.id} rows="20" colimuns="80"></textarea>
+		<input type="submit" value="Comment!">
+	</form>
+	
+
+</body>
+</html>
